@@ -19,9 +19,9 @@ FROM pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime
 ENV DEBIAN_FRONTEND=noninteractive PIP_PREFER_BINARY=1
 
 RUN --mount=type=cache,target=/var/cache/apt \
-  apt-get update && \
+  apt update && \
   # we need those
-  apt-get install -y fonts-dejavu-core rsync git jq moreutils aria2 \
+  apt install -y fonts-dejavu-core rsync git jq moreutils aria2 \
   # extensions needs those
   ffmpeg libglfw3-dev libgles2-mesa-dev pkg-config libcairo2 libcairo2-dev build-essential
 
@@ -47,7 +47,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 # there seems to be a memory leak (or maybe just memory not being freed fast enough) that is fixed by this version of malloc
 # maybe move this up to the dependencies list.
-RUN apt-get -y install libgoogle-perftools-dev && apt-get clean
+RUN apt -y install libgoogle-perftools-dev && apt-get clean
 ENV LD_PRELOAD=libtcmalloc.so
 
 COPY . /docker
