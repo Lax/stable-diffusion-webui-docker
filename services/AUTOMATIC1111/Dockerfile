@@ -18,6 +18,8 @@ FROM pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive PIP_PREFER_BINARY=1
 
+ADD sources.list /etc/apt/sources.list
+
 RUN --mount=type=cache,target=/var/cache/apt \
   apt update && \
   # we need those
